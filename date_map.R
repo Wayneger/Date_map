@@ -19,3 +19,22 @@ data_information <- data.frame(
 )
 data_information  
 
+#Exercise 2: Complex Date Arithmetic
+#Question 2: Given the following dates, compute the difference in months and weeks between each consecutive pair.
+
+sample_dates <- ymd(c("2018-03-15", "2020-07-20", "2023-01-10", "2025-09-05"))
+
+#Calculate the difference in months between each consecutive pair of dates
+months_difference <- time_length(interval(sample_dates[-length(sample_dates)], sample_dates[-1]), "months")
+
+#Compute the total week difference.
+week_difference <- time_length(interval(sample_dates[-length(sample_dates)], sample_dates[-1]), "weeks")
+
+#Create a data frame to display the results.
+Difference_in_months_and_weeks <- data.frame(
+  Start_Date = sample_dates[-length(sample_dates)],
+  End_Date = sample_dates[-1],
+  Month_Difference = round(months_difference),
+  Week_Difference = round(week_difference)
+)
+Difference_in_months_and_weeks
