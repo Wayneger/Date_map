@@ -58,3 +58,18 @@ data_indexs <- data.frame(
   SD = sd_values
 )
 data_indexs
+
+#Exercise 4: Combining lubridate and purrr
+#Question 4: Given a list of mixed date formats, use map() and possibly() from purrr to safely convert them to Date format and extract the month name.
+
+Sys.setlocale("LC_TIME", "C")
+date_strings <- list("2023-06-10", "2022/12/25", "15-Aug-2021", "InvalidDate")
+
+#Create a safe function to parse dates while handling errors
+safe_parse_date <- possibly(~ as.Date(.x, tryFormats = c("%Y-%m-%d", "%Y/%m/%d", "%d-%b-%Y")), NA)
+
+#Convert date strings into Date format safely.
+converted_dates <- map(date_strings, safe_parse_date)
+
+#Extract the month name from each valid date.
+map_chr(converted_dates, ~ ifelse(is.na(.x), "Invalid", as.character(month(.x, label = TRUE, abbr = TRUE))))
