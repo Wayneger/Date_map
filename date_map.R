@@ -38,3 +38,23 @@ Difference_in_months_and_weeks <- data.frame(
   Week_Difference = round(week_difference)
 )
 Difference_in_months_and_weeks
+
+#Exercise 3: Higher-Order Functions with purrr
+#Question 3: Using map() and map_dbl(), compute the mean, median, and standard deviation for each numeric vector in the following list:
+
+num_lists <- list(c(4, 16, 25, 36, 49), c(2.3, 5.7, 8.1, 11.4), c(10, 20, 30, 40, 50))
+
+#Compute the mean.
+mean_values <- map_dbl(num_lists, mean)
+
+#Compute the median.
+median_values <- map_dbl(num_lists, stats::median)
+
+#Compute the SD.
+sd_values <- map_dbl(num_lists, sd)
+data_indexs <- data.frame(
+  means = mean_values,
+  median = median_values,
+  SD = sd_values
+)
+data_indexs
